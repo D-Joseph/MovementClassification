@@ -12,11 +12,11 @@ def proc(data: str):
 
   # Split into 5s windows
   segments = []
-  numSegs = len(data) // 500
+  numSegs = len(dataCSV) // 500
   for i in range(numSegs):
     beg = i * 500
     end = beg + 500
-    segments.append(data.iloc[beg:end, :]) 
+    segments.append(dataCSV.iloc[beg:end, :]) 
   segments = np.array(segments)
   # Feature extraction for inputted data
   inputFeats=preProc_feat_train.preproc(segments)
@@ -32,5 +32,6 @@ def proc(data: str):
     result[i] += 1
   print(result)
   print(clf_prob)
-  return [0 if result[0] > result[1] else 1, dataCSV]
+
+  return ['Walking' if result[0] > result[1] else 'Jumping', dataCSV]
 proc('Raw_Data.csv')
