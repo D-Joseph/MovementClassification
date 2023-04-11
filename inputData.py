@@ -3,9 +3,14 @@ import numpy as np
 import preProc_feat_train
 import pickle
 
-def inputData(data: str):
-  data = pd.read_csv(data)
+def proc(data: str):
+  # Convert input csv to pd df
+  dataCSV = pd.read_csv('Raw_Data.csv')
+
+  # Keep track of predictions
   result = {0:0, 1:0}
+
+  # Split into 5s windows
   segments = []
   numSegs = len(data) // 500
   for i in range(numSegs):
@@ -13,12 +18,19 @@ def inputData(data: str):
     end = beg + 500
     segments.append(data.iloc[beg:end, :]) 
   segments = np.array(segments)
+  # Feature extraction for inputted data
   inputFeats=preProc_feat_train.preproc(segments)
+
+  # Call model
   clf = pickle.load(open('predictor.sav', 'rb'))
   pred = clf.predict(inputFeats)
   clf_prob = clf.predict_proba(inputFeats)
+  print(segments)
+  # Output results
   print(pred)
   for i in pred:
     result[i] += 1
   print(result)
   print(clf_prob)
+  return [0 if result[0] > result[1] else 1, dataCSV]
+proc('Raw_Data.csv')
