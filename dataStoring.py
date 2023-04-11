@@ -37,7 +37,7 @@ walkingData['label'] = 0
 jumpingData['label'] = 1
 allData = pd.concat([walkingData, jumpingData])
 
-# Split all data into 5 second windows
+# Split all data into 5 second (~500 rows) windows
 numSegs = len(allData) // 500 # Find how many segments there will be
 
 segmentedData = [] # Will hold the 500 record segments
@@ -47,7 +47,7 @@ for i in range(numSegs):
     beg = i * 500
     end = beg + 500
     # In the segments, only include the data and not the final column
-    segmentedData.append(allData.iloc[beg:end, :-1])  
+    segmentedData.append(allData.iloc[beg:end, :-1]) 
     # Only include the final column, all the segments in 1 window will have the same label so just pull the first one
     labels.append(allData.iloc[beg, -1]) 
 segmentedData = np.array(segmentedData)
@@ -68,12 +68,21 @@ with h5.File('./hdf5_data.h5', 'w') as hdf:
       
     char = hdf.create_group('/Char')
     char.create_dataset('Walking', data=charWalkingData)
+    char.create_dataset('walkingPant', data=pd.read_csv('Data/CharWalkingPant.csv'))
     char.create_dataset('Jumping', data=charJumpingData)
 
     nile = hdf.create_group('/Nile')
-    nile.create_dataset('Walking', data=nileWalkingData)
+    nile.create_dataset('Walking', data=nileWalkingData) 
     nile.create_dataset('Jumping', data=nileJumpingData)
 
     dan = hdf.create_group('/Dan')
     dan.create_dataset('Walking', data=danWalkingData)
     dan.create_dataset('Jumping', data=danJumpingData)
+
+    comb = hdf.create_group('/Combined')
+    comb.create_dataset('Walking', data=walkingData)
+    comb.create_dataset('Jumping', data=jumpingData)
+    comb.create_dataset('All', data=allData)
+    comb.create_dataset('Segmented', data=segmentedData)
+    comb.create_dataset('Labels', data=labels)
+hdf.close()
