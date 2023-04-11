@@ -3,8 +3,6 @@ import pandas as pd
 import h5py as h5
 from sklearn.model_selection import train_test_split
 
-
-
 # This is the smallest csv file, so limit the size of other files to ensure that they all represent similar times
 # Round this number down to nearest 500 as we will split into 500 row (~5s) segments
 minData = (len(pd.read_csv('Data/DanielWalkingHand.csv')) // 500) * 500

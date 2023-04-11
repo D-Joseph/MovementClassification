@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import preProc_feat_train
+import preProc_featExtract
 import pickle
 
 def proc(data: str):
@@ -19,7 +19,7 @@ def proc(data: str):
     segments.append(dataPD.iloc[beg:end, :]) 
   segments = np.array(segments)
   # Feature extraction for inputted data
-  inputFeats=preProc_feat_train.preproc(segments)
+  inputFeats=preProc_featExtract.preproc(segments)
 
   # Call model
   clf = pickle.load(open('predictor.sav', 'rb'))
