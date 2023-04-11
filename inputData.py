@@ -5,7 +5,7 @@ import pickle
 
 def proc(data: str):
   # Convert input csv to pd df
-  dataCSV = pd.read_csv('Raw_Data.csv')
+  dataCSV = pd.read_csv(data)
 
   # Keep track of predictions
   result = {0:0, 1:0}
