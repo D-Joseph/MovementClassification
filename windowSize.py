@@ -4,6 +4,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
+from sklearn.metrics import f1_score
 from sklearn.metrics import recall_score
 import preProc_featExtract
 
@@ -18,10 +19,11 @@ with h5.File('./hdf5_data.h5', 'r') as hdf:
 maxAcc = [0, 0]
 maxRec = [0, 0]
 maxAUC = [0, 0]
-for i in range(1, 100):
+maxF1 = [0, 0]
+for i in range(1, 30):
   print(i)
-  trainFeats = preProc_featExtract.preproc(train)
-  testFeats = preProc_featExtract.preproc(test)
+  trainFeats = preProc_featExtract.preproc(train, i)
+  testFeats = preProc_featExtract.preproc(test, i)
   clf = make_pipeline(LogisticRegression(max_iter=10000))
   clf.fit(trainFeats, trainLabels)
   pred = clf.predict(testFeats)
@@ -29,7 +31,7 @@ for i in range(1, 100):
 
   acc = accuracy_score(testLabels, pred)
   recall = recall_score(testLabels, pred)
-  #calculate the AUC
+  f1 = f1_score(testLabels, pred)
   auc = roc_auc_score(testLabels, clf_prob[:,1])
   if(acc > maxAcc[1]):
      maxAcc[0] = i
@@ -40,4 +42,7 @@ for i in range(1, 100):
   if(recall > maxRec[1]):
      maxRec[0] = i
      maxRec[1] = recall
-print(maxAcc, maxAUC, maxRec)
+  if(f1 > maxF1[1]):
+    maxF1[0] = i
+    maxF1[1] = f1
+print(maxAcc, maxAUC, maxRec, maxF1)
