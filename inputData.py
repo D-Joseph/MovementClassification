@@ -3,10 +3,7 @@ import numpy as np
 import preProc_featExtract
 import pickle
 
-def proc(data: str):
-  # Convert input csv to pd df
-  dataPD = pd.read_csv(data)
-
+def proc(dataPD):
   # Keep track of predictions
   result = {0:0, 1:0}
 

@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, filedialog
 import inputData
+import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -72,7 +73,8 @@ def processResults():
     save_button.pack_forget()
 
     #make predictions
-    result = inputData.proc(in_file_path)
+    file = pd.read_csv(in_file_path)
+    result = inputData.proc(file)
 
     #show overall prediction
     save_dialog = tk.Label(text="\nPrediction " + result[0], font=('Helvetica', 16))
