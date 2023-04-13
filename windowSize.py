@@ -10,10 +10,10 @@ import preProc_featExtract
 
 
 with h5.File('./hdf5_data.h5', 'r') as hdf:
-    train = np.array(hdf.get('Dataset/Train/Data'))
-    test = np.array(hdf.get('Dataset/Test/Data'))
-    trainLabels = np.array(hdf.get('Dataset/Train/Label'))
-    testLabels = np.array(hdf.get('Dataset/Test/Label'))
+  train = np.array(hdf.get('Dataset/Train/Data'))
+  test = np.array(hdf.get('Dataset/Test/Data'))
+  trainLabels = np.array(hdf.get('Dataset/Train/Label'))
+  testLabels = np.array(hdf.get('Dataset/Test/Label'))
 
 # These lists will hold [index, max value]    
 maxAcc = [0, 0]
@@ -34,14 +34,14 @@ for i in range(1, 30):
   f1 = f1_score(testLabels, pred)
   auc = roc_auc_score(testLabels, clf_prob[:,1])
   if(acc > maxAcc[1]):
-     maxAcc[0] = i
-     maxAcc[1] = acc
+    maxAcc[0] = i
+    maxAcc[1] = acc
   if(auc > maxAUC[1]):
-     maxAUC[0] = i
-     maxAUC[1] = auc
+    maxAUC[0] = i
+    maxAUC[1] = auc
   if(recall > maxRec[1]):
-     maxRec[0] = i
-     maxRec[1] = recall
+    maxRec[0] = i
+    maxRec[1] = recall
   if(f1 > maxF1[1]):
     maxF1[0] = i
     maxF1[1] = f1

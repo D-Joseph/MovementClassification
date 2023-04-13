@@ -2,8 +2,10 @@ import h5py as h5
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-from sklearn.svm import SVC
+from sklearn.svm import SVC, LinearSVC
+from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_curve, RocCurveDisplay, confusion_matrix, ConfusionMatrixDisplay, roc_auc_score, recall_score, f1_score
 import pickle
@@ -19,10 +21,13 @@ trainFeats = preProc_featExtract.preproc(train)
 
 testFeats = preProc_featExtract.preproc(test)
 # clf = LogisticRegression(max_iter=10000)
-clf = SVC(probability=True)
+# clf = SVC(kernel='poly', degree=2, probability=True)
+# clf = LinearSVC(max_iter=10000)
+clf = RandomForestClassifier(n_estimators=10000)
 clf.fit(trainFeats, trainLabels)
 pred = clf.predict(testFeats)
 clf_prob = clf.predict_proba(testFeats)
+
 # print(pred, clf_prob)
 
 acc = accuracy_score(testLabels, pred)
