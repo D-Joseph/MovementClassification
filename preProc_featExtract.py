@@ -107,8 +107,8 @@ def preproc(data):
         'rmsX': np.sqrt(np.mean(df_sma.x**2)),
         'rmsY': np.sqrt(np.mean(df_sma.y**2)),
         'rmsZ': np.sqrt(np.mean(df_sma.z**2)),
-        'rmsA': np.sqrt(np.mean(df_sma.z**2))
+        'rmsA': np.sqrt(np.mean(df_sma.a**2))
     }, index=[c])
     # Concatenate the new row to the features dataframe
-    features = pd.concat([features, row], ignore_index=False)
+    features = pd.concat([features, row])
   return features

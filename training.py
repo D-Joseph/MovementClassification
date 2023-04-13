@@ -18,7 +18,6 @@ with h5.File('./hdf5_data.h5', 'r') as hdf:
     trainLabels = np.array(hdf.get('Dataset/Train/Label'))
     testLabels = np.array(hdf.get('Dataset/Test/Label'))
 trainFeats = preProc_featExtract.preproc(train)
-
 testFeats = preProc_featExtract.preproc(test)
 # clf = LogisticRegression(max_iter=10000)
 # clf = SVC(kernel='poly', degree=2, probability=True)
@@ -55,4 +54,4 @@ f1 = f1_score(testLabels, pred)
 print('F1 score:', f1)
 
 # # Create a pickle object to save the model
-# pickle.dump(clf, open('predictor.sav', 'wb'))
+pickle.dump(clf, open('predictor.sav', 'wb'))
