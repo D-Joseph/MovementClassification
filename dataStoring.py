@@ -50,7 +50,7 @@ for i in range(numSegs):
     labels.append(allData.iloc[beg, -1]) 
 segmentedData = np.array(segmentedData)
 labels = np.array(labels)
-X_train, X_test, y_train, y_test = train_test_split(segmentedData, labels, test_size=0.1, shuffle=True, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(segmentedData, labels, test_size=0.1, shuffle=True)
 
 # Create hdf5 file with subfolders for the train and test data, and each members combined data and raw data
 with h5.File('./hdf5_data.h5', 'w') as hdf:

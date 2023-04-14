@@ -20,7 +20,7 @@ in_file_path = ''
 #define model results
 global result
 
-#save CSV file with 'Walking' or 'Running' label at location selected
+#save CSV file with 'Walking' or 'Jumping' label at location selected
 def saveFile():
     files = [('CSV file', '*.csv')]
     file_path = filedialog.asksaveasfile(filetypes=files, defaultextension='.csv')
@@ -50,9 +50,9 @@ def plotResult():
 
     #plot prediction vs time
     ax2 = ax1.twinx()
-    ax2.set_ylabel('Walking or Running', color='blue')
+    ax2.set_ylabel('Walking or Jumping', color='blue')
     ax2.yaxis.set_label_coords(1.05, 0.5)
-    ax2.plot(result_copy['Time (s)'], result_copy['Label'], label='Walking or Running', color='blue', zorder=2)
+    ax2.plot(result_copy['Time (s)'], result_copy['Label'], label='Walking or Jumping', color='blue', zorder=2)
 
 
     #add title
@@ -77,7 +77,7 @@ def processResults():
     result = inputData.proc(file)
 
     #show overall prediction
-    save_dialog = tk.Label(text="\nPrediction " + result[0], font=('Helvetica', 16))
+    save_dialog = tk.Label(text="\nPrediction: " + result[0], font=('Helvetica', 16))
 
     #get plot
     plotResult()
@@ -115,7 +115,7 @@ def searchFile():
 
 
 #display input instructions
-intro = tk.Label(text="Upload CSV file to determine if user is running or walking", font=('Helvetica', 16))
+intro = tk.Label(text="Upload CSV file to determine if user is jumping or walking", font=('Helvetica', 16))
 intro.pack()
 
 #display search button
