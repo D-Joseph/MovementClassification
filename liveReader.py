@@ -4,31 +4,29 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 
 # Define prediction to be accessed by GUI
 global prediction
 prediction = ''
+def liveRead():
+    # Change URL to one specified in phyphox
+    global prediction
+    #url = 'http://10.216.105.182'
+    url = 'http://172.20.10.1'
 
-# Change URL to one specified in phyphox
-url = 'http://172.20.10.1'
+    # Set up selenium chrome driver
+    options = Options()
+    options.headless = True
+    service = Service('/path/to/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
 
-# Set up selenium chrome driver
-options = Options()
-options.headless = True
-service = Service('/path/to/chromedriver')
-driver = webdriver.Chrome(service=service, options=options)
+    # Go to webpage
+    driver.get(url)
 
-# Go to webpage
-driver.get(url)
-
-# Define and click simple button
-button = driver.find_element(By.CSS_SELECTOR, '#viewSelector > li:nth-child(4)')
-button.click()
-
-
-while True:
+    # Define and click simple button
+    button = driver.find_element(By.CSS_SELECTOR, '#viewSelector > li:nth-child(4)')
+    button.click()
 
     #create apandas data Frame
     column_labels = ['Time (s)', 'Linear Acceleration x (m/s^2)', 'Linear Acceleration y (m/s^2)',
@@ -69,5 +67,6 @@ while True:
     prediction = result[0]
     print("prediction" + prediction)
 
-# close chrome driver
-driver.quit()
+    # close chrome driver
+    driver.quit()
+liveRead()
