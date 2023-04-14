@@ -30,9 +30,6 @@ def updateLabel():
 
     window.after(5000, updateLabel)
 
-#add start button
-#global start_button
-
 def updateLoop():
     print("loop")
     updateLabel()
@@ -51,8 +48,6 @@ liveReader.liveInitialize()
 
 print("reader initialized")
 
-#start_button = tk.Button(window, text='Start', command=updateLoop)
-#start_button.pack()
 updateLoop()
 
 #create window
