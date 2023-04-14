@@ -24,7 +24,7 @@ def updateLabel():
     result_label.config(text='Prediction: ' + prediction)
 
     #schedule next update after 5 seconds
-    window.after(5000, updateLabel)
+    window.after(5000, updateLabel) #still not sure if its supposed to be 5 seconds or how often to update
 
 #create instructions and prediction label
 intro = tk.Label(text="Real-time prediction of walking or jumping", font=('Helvetica', 16))
