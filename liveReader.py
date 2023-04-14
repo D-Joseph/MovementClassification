@@ -28,10 +28,6 @@ def liveRead():
     button = driver.find_element(By.CSS_SELECTOR, '#viewSelector > li:nth-child(4)')
     button.click()
 
-
-    print("here")
-
-
     #create apandas data Frame
     column_labels = ['Time (s)', 'Linear Acceleration x (m/s^2)', 'Linear Acceleration y (m/s^2)',
                      'Linear Acceleration z (m/s^2)', 'Absolute acceleration (m/s^2)']
