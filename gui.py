@@ -9,6 +9,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 global window
 window = tk.Tk()
 
+
+
 #define canvas for plot
 global canvas
 canvas = FigureCanvasTkAgg(None, master=window)
@@ -51,6 +53,7 @@ def plotResult():
     #plot prediction vs time
     ax2 = ax1.twinx()
     ax2.set_ylabel('Walking or Jumping', color='blue')
+    ax2.set_ylim([-0.1, 1.1])
     ax2.yaxis.set_label_coords(1.05, 0.5)
     ax2.plot(result_copy['Time (s)'], result_copy['Label'], label='Walking or Jumping', color='blue', zorder=2)
 
@@ -77,7 +80,7 @@ def processResults():
     result = inputData.proc(file)
 
     #show overall prediction
-    save_dialog = tk.Label(text="\nPrediction: " + result[0], font=('Helvetica', 16))
+    save_dialog = tk.Label(text="\nMajority Prediction: " + result[0], font=('Helvetica', 16))
 
     #get plot
     plotResult()
@@ -102,6 +105,7 @@ def searchFile():
         title='Select a CSV file',
         filetypes=(('CSV files', '*.csv'),)
     )
+    print(in_file_path)
 
     #if file found, get rid of all previous dialogs and add predict button and dialog
     if in_file_path != '':
