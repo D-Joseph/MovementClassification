@@ -47,7 +47,7 @@ The purpose of feature extraction is to extract key information that represents 
 ## Classifier Training
 Following feature extraction, a Logistic Regression (LR) model was used to classify the data. LR classifiers are generally used for binary classification problems where the goal is to predict one of two outcomes, such as walking or jumping.
 
-The Logistic Regression model was created using the *LogisticRegression* class from scikit-learn. The only parameter that was used was the maximum number of iterations which was set to 10,000 to ensure that the model had enough time to converge and find an optimal solution [1]. The default value of *max_iter* is 100, which may not be sufficient for complex datasets such as the walking and jumping data used for this project. The trade-off of using such a high value is that it may increase the training time of the model. Although the method used in the lectures and lab was...
+The Logistic Regression model was created using the *LogisticRegression* class from scikit-learn. The only parameter that was used was the maximum number of iterations which was set to 10,000 to ensure that the model had enough time to converge and find an optimal solution [1]. The default value of *max_iter* is 100, which may not be sufficient for complex datasets such as the walking and jumping data used for this project. The trade-off of using such a high value is that it may increase the training time of the model.
 
 To evaluate the performance of the model, several metrics and plots were used. This includes accuracy, recall, F1 score, and the Area Under the Curve (AUC).
 
